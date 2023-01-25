@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Red+Hat+Display:wght@300;400;500;600;700&display=swap');
+
+*,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+.formContainer {
+  background-color: #2192ff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .formWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background-color: #2f2d52;
+    padding: 20px 60px;
+    border-radius: 30px;
+    box-shadow: 8px 8px 30px #fff;
+
+    .logo {
+      color: #1089ff;
+      font-weight: 700;
+      font-size: 36px;
+      font-family: 'PT Serif', serif;
+    }
+
+    .title {
+      font-weight: 500;
+      font-size: 20px;
+      color: #ddddf7;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      input {
+        border-radius: 25px;
+        padding: 15px;
+        color: #ddddf7;
+        border: none;
+        font-size: 18px;
+        background-color: #3e3c61;
+        border-bottom: 1px solid #1042e9;
+        width: 300px;
+        outline: none;
+        &::placeholder {
+          color: rgb(246, 242, 242);
+          font-size: 14px;
+          font-weight: 300;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+
+      button {
+        padding: 10px;
+        background-color: #2192ff;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        border-radius: 20px;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #113cfc;
+        font-size: 12px;
+        cursor: pointer;
+
+        img {
+          width: 32px;
+        }
+      }
+    }
+
+    p {
+      color: #ddddf7;
+      font-size: 16px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+  }
+}
+
+.home {
+  background-color: #2192ff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    border: 2px solid black;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 65%;
+    height: 80%;
+    box-shadow: 10px 10px 20px rgb(238, 237, 237);
+    display: flex;
+
+    .sidebar {
+      flex: 1;
+      background-color: #3e3c61;
+      position: relative;
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        background-color: #2f2d52;
+        height: 60px;
+        padding: 15px;
+        justify-content: space-between;
+        color: #ddddf7;
+
+        .logo {
+          color: #2192ff;
+          font-size: 24px;
+          font-weight: 700;
+        }
+
+        .user {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+
+          img {
+            background-color: #ddddf7;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          button {
+            background-color: #5d5b8d;
+            color: #ddddf7;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 20px;
+          }
+        }
+      }
+    }
+
+    .chat {
+      flex: 2;
+      background-color: white;
+    }
+  }
+}
+
+// Color Codes
+// Background : #2192ff
+// Form Background : #2f2d52
+// input Background : #3e3c61
+// Signin Button Background : #2192ff
+// Logout Button Background : #5d5b8d
+// Logo Text Color : #1089ff
+// P Text Color : #ddddf7
