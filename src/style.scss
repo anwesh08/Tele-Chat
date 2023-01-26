@@ -259,6 +259,7 @@ body {
           .messageInfo {
             display: flex;
             flex-direction: column;
+            align-items: center;
             color: gray;
             font-weight: 400;
 
@@ -285,6 +286,7 @@ body {
 
             img {
               width: 50%;
+              border-radius: 10px;
             }
           }
 
