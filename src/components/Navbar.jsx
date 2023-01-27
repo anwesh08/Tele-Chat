@@ -13,7 +13,7 @@ const Navbar = () => {
       <span className="logo">Tele Chat</span>
       <div className='user'>
         <img src={currentUser.photoURL} alt="" />
-        <span>{currentUser.username}</span>
+        <span>{currentUser.displayName}</span>
         <button onClick={() => signOut(auth)}>
           <img src={Logout} alt="" />
         </button>
