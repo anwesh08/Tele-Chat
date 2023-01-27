@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+
 import { Link, useNavigate } from 'react-router-dom';
+
 import addAvatar from '../images/addAvatar.png'
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+
 import { auth, storage, db } from '../firebase'
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -28,7 +31,7 @@ function Register() {
                setErr(true)
             },
             () => {
-               getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
+               getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
                   await updateProfile(res.user, {
                      username,
                      photoURL: downloadURL
@@ -66,10 +69,10 @@ function Register() {
                   <span>Add a avatar</span>
                </label>
                <button>Sign Up</button>
-               {err && <span>Something went wrong</span>}
+               {err && <span>Something went wrong !!</span>}
             </form>
             <p>
-               You do have an account ? Login
+               You do have an account ? <Link to={'/login'} className='link'>Login</Link>
             </p>
          </div>
       </div>

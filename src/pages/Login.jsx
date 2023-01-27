@@ -1,7 +1,9 @@
-import { signInWithEmailAndPassword } from 'firebase/auth'
 import React, { useState } from 'react'
+
 import { Link, useNavigate } from 'react-router-dom'
+
 import { auth } from '../firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 const Login = () => {
    const [err, setErr] = useState(false)
@@ -27,10 +29,10 @@ const Login = () => {
                <input required type="email" placeholder='Email' />
                <input required type="password" placeholder='Password' />
                <button>Sign in</button>
-               {err && <span>Something went wrong</span>}
+               {err && <span className='error'>Something went wrong !!</span>}
             </form>
             <p>
-               You don't have an account ? Register
+               You don't have an account ? <Link to={'/register'} className='link'>Register</Link>
             </p>
          </div>
       </div>
