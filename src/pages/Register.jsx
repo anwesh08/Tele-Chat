@@ -14,7 +14,7 @@ function Register() {
    const navigate = useNavigate()
    const handleSubmit = async (e) => {
       e.preventDefault()
-      const username = e.target[0].value;
+      const displayName = e.target[0].value;
       const email = e.target[1].value;
       const password = e.target[2].value;
       const file = e.target[3].files[0];
@@ -24,7 +24,7 @@ function Register() {
          const res = await createUserWithEmailAndPassword(auth, email, password)
          console.log(res)
          //Create a unique image name
-         const storageRef = ref(storage, username);
+         const storageRef = ref(storage, displayName);
          const uploadTask = uploadBytesResumable(storageRef, file);
          uploadTask.on(
             (error) => {
@@ -34,19 +34,19 @@ function Register() {
                getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
                   //Update profile
                   await updateProfile(res.user, {
-                     username,
-                     photoURL: downloadURL
+                     displayName,
+                     photoURL: downloadURL,
                   });
                   //create user on firestore
-                  await setDoc(doc(db, "user", res.user.uid), {
+                  await setDoc(doc(db, "users", res.user.uid), {
                      uid: res.user.uid,
-                     username,
+                     displayName,
                      email,
-                     photoURL: downloadURL
-                  })
+                     photoURL: downloadURL,
+                  });
                   //create empty user chats on firestore
-                  await setDoc(doc(db, "userchats", res.user.uid), {})
-                  navigate('/')
+                  await setDoc(doc(db, "userChats", res.user.uid), {});
+                  navigate("/");
                });
             }
          );
