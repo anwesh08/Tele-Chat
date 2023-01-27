@@ -12,8 +12,8 @@ const Navbar = () => {
     <div className='navbar'>
       <span className="logo">Tele Chat</span>
       <div className='user'>
-        <img src="https://images.pexels.com/photos/678783/pexels-photo-678783.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-        <span>Anwesh Mishra</span>
+        <img src={currentUser.photoURL} alt="" />
+        <span>{currentUser.username}</span>
         <button onClick={() => signOut(auth)}>
           <img src={Logout} alt="" />
         </button>

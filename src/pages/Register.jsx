@@ -32,6 +32,7 @@ function Register() {
             },
             () => {
                getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                  //Update profile
                   await updateProfile(res.user, {
                      username,
                      photoURL: downloadURL
@@ -45,7 +46,7 @@ function Register() {
                   })
                   //create empty user chats on firestore
                   await setDoc(doc(db, "userchats", res.user.uid), {})
-                  navigate('/login')
+                  navigate('/')
                });
             }
          );
@@ -69,7 +70,7 @@ function Register() {
                   <span>Add a avatar</span>
                </label>
                <button>Sign Up</button>
-               {err && <span>Something went wrong !!</span>}
+               {err && <span className='error'>Something went wrong !!</span>}
             </form>
             <p>
                You do have an account ? <Link to={'/login'} className='link'>Login</Link>
