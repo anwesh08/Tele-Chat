@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import addAvatar from '../images/addAvatar.png'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, storage, db } from '../firebase'
@@ -8,6 +8,7 @@ import { doc, setDoc } from "firebase/firestore";
 
 function Register() {
    const [err, setErr] = useState(false)
+   const navigate = useNavigate()
    const handleSubmit = async (e) => {
       e.preventDefault()
       const username = e.target[0].value;
@@ -32,12 +33,16 @@ function Register() {
                      username,
                      photoURL: downloadURL
                   });
+                  //create user on firestore
                   await setDoc(doc(db, "user", res.user.uid), {
                      uid: res.user.uid,
                      username,
                      email,
                      photoURL: downloadURL
                   })
+                  //create empty user chats on firestore
+                  await setDoc(doc(db, "userchats", res.user.uid), {})
+                  navigate('/login')
                });
             }
          );
@@ -52,10 +57,10 @@ function Register() {
             <span className="logo">Tele Chat</span>
             <span className="title">Register</span>
             <form onSubmit={handleSubmit}>
-               <input type="text" placeholder='Username' />
-               <input type="email" placeholder='Email' />
-               <input type="password" placeholder='Password' />
-               <input type="file" id='file' style={{ display: 'none' }} />
+               <input required type="text" placeholder='Username' />
+               <input required type="email" placeholder='Email' />
+               <input required type="password" placeholder='Password' />
+               <input required type="file" id='file' style={{ display: 'none' }} />
                <label htmlFor="file">
                   <img src={addAvatar} alt="" />
                   <span>Add a avatar</span>
