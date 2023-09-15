@@ -172,9 +172,9 @@ body {
             align-items: center;
 
             img {
-               background-color: transparent;
-               width: 22px;
-               height: 28px;
+              background-color: transparent;
+              width: 22px;
+              height: 28px;
             }
           }
         }
@@ -241,15 +241,23 @@ body {
       .chatInfo {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
+        gap: 30px;
         height: 60px;
         background-color: #5d5b8d;
         padding: 15px;
         color: lightgray;
 
+        img {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
         span {
           font-size: 18px;
-          font-weight: 600;
+          font-weight: 700;
           color: #ddddf7;
         }
 

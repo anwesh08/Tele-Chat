@@ -1,31 +1,36 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from "react";
 
-import { db, storage } from '../firebase'
-import { AuthContext } from '../context/AuthContext'
-import { ChatContext } from '../context/ChatContext'
-import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore'
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { db, storage } from "../firebase";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
+import {
+  arrayUnion,
+  doc,
+  serverTimestamp,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from "uuid";
 
-import Add from '../images/addAvatar.png'
-import Attach from '../images/attach.png'
-import Send from '../images/send.png'
+import Add from "../images/addAvatar.png";
+import Attach from "../images/attach.png";
+import Send from "../images/send.png";
 
 const Input = () => {
-  const { currentUser } = useContext(AuthContext)
-  const { data } = useContext(ChatContext)
+  const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
 
-  const [text, setText] = useState("")
-  const [img, setImg] = useState(null)
+  const [text, setText] = useState("");
+  const [img, setImg] = useState(null);
 
   const handleSend = async () => {
     if (img) {
       const storageRef = ref(storage, uuid());
       const uploadTask = uploadBytesResumable(storageRef, img);
       uploadTask.on(
-        (error) => {
-        },
+        (error) => {},
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateDoc(doc(db, "chats", data.chatId), {
@@ -66,13 +71,27 @@ const Input = () => {
 
     setText("");
     setImg(null);
-  }
+  };
+  const handleKey = (e) => {
+    e.code === "Enter" && handleSend();
+  };
   return (
-    <div className='input'>
-      <input type="text" placeholder='Type something...' value={text} onChange={e => setText(e.target.value)} />
+    <div className="input">
+      <input
+        type="text"
+        placeholder="Type something..."
+        value={text}
+        onKeyDown={handleKey}
+        onChange={(e) => setText(e.target.value)}
+      />
       <div className="send">
         <img src={Attach} alt="" />
-        <input type="file" id="file" style={{ display: 'none' }} onChange={e => setImg(e.target.value)} />
+        <input
+          type="file"
+          id="file"
+          style={{ display: "none" }}
+          onChange={(e) => setImg(e.target.value)}
+        />
         <label htmlFor="file">
           <img src={Add} alt="" />
         </label>
@@ -81,7 +100,7 @@ const Input = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;
